@@ -22,7 +22,26 @@ public class ListToMap {
 		// Function.identity는 t -> t, 항상 입력된 인자(자신)를 반환합니다.
 		Map<String, Person> personMap = personList.stream()
 				.collect(Collectors.toMap(Person::getName, Function.identity()));
-		System.out.println(personMap);
+
+		
+		Map<String,Person> personMap2 = personList.stream()
+				.collect(Collectors.toMap(new Function<Person, String>(){
+
+					@Override
+					public String apply(Person person) {
+						// TODO Auto-generated method stub
+						return person.getName();
+					}
+					
+				}, new Function<Person, Person>() {
+
+					@Override
+					public Person apply(Person person) {
+						// TODO Auto-generated method stub
+						return person;
+					}
+					
+				}));
 	}
 
 }
